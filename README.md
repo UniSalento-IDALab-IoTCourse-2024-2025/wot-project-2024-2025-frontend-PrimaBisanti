@@ -57,3 +57,29 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Introduzione
+
+Il progetto B.U.S. è una piattaforma intelligente pensata per migliorare la sicurezza e la trasparenza del servizio di trasporto scolastico. Grazie a un sistema automatizzato di rilevamento basato su beacon BLE, i genitori possono monitorare in tempo reale la presenza dei bambini a bordo dello scuolabus. Questo repository contiene l’interfaccia Web sviluppata in Angular, che offre un'interfaccia semplice e intuitiva per la consultazione delle informazioni, la gestione degli utenti e l’interazione con il sistema.
+
+## Architettura del sistema
+
+La Web App comunica con Firestore per leggere/scrivere i dati in tempo reale, riceve notifiche push tramite Firebase Cloud Messaging e interagisce con le funzioni serverless per la logica dinamica. I dati arrivano dal Raspberry Pi che rileva i beacon BLE assegnati ai bambini.
+
+![Architettura del sistema](immaginiReadme/architettura.png)
+
+## Funzionalità utente
+
+Genitore:
+-	Registrazione e login (via email/password o Google).
+-	Associazione figli e visualizzazione attività.
+-	Ricezione notifiche push.
+-	Accesso alla cronologia spostamenti.
+-	Utilizzo chatbot per richieste personalizzate.
+
+Autista:
+-	Visualizzazione elenco bambini.
+-	Possibilità di modificare manualmente lo stato di salita/discesa.
+
+Amministratore:
+-	Gestione entità come: autisti, beacon, fermate, genitori, bambini.
