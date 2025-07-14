@@ -66,7 +66,7 @@ Il progetto B.U.S. è una piattaforma intelligente pensata per migliorare la sic
 
 La Web App comunica con Firestore per leggere/scrivere i dati in tempo reale, riceve notifiche push tramite Firebase Cloud Messaging e interagisce con le funzioni serverless per la logica dinamica. I dati arrivano dal Raspberry Pi che rileva i beacon BLE assegnati ai bambini.
 
-![Architettura del sistema](immaginiReadme/architettura.png)
+![Architettura del sistema](immaginiReadme/architettura.jpeg)
 
 ## Funzionalità utente
 
