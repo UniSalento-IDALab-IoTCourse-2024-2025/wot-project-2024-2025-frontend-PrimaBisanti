@@ -7,7 +7,7 @@ importScripts('https://www.gstatic.com/firebasejs/11.9.1/firebase-messaging-comp
 
 // Configurazione dell'app Firebase (usa la tua configurazione del progetto)
 const firebaseConfig = {
-    apiKey: "AIzaSyDko-faaC1i08nHNa9fldzonc69yE8HzF0",
+    apiKey: "AIzaSyD9T-VKjNag525JhXbp8USLRHmqr21uFPs",
     authDomain: "iot-scuoabus.firebaseapp.com",
     projectId: "iot-scuoabus",
     storageBucket: "iot-scuoabus.firebasestorage.app",

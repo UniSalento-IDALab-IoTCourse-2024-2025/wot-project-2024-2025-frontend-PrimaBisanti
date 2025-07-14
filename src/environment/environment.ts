@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyDko-faaC1i08nHNa9fldzonc69yE8HzF0",
+    apiKey: "AIzaSyD9T-VKjNag525JhXbp8USLRHmqr21uFPs",
     authDomain: "iot-scuoabus.firebaseapp.com",
     projectId: "iot-scuoabus",
     storageBucket: "iot-scuoabus.firebasestorage.app",
