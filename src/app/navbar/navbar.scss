@@ -1,0 +1,231 @@
+.navbar {
+  background-color: rgba(133, 189, 215, 0.95);
+  padding: 10px 20px; 
+  display: flex; 
+  align-items: center; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Poetsen One', sans-serif;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  height: 60px;
+}
+
+.navbar-brand {
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  position: absolute;
+  left: 49%;
+  transform: translateX(-50%); 
+  z-index: 101;
+  width: auto; 
+  padding: 0;
+  margin: 0; 
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  margin: 0;
+  display: block;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px; 
+  position: relative; 
+  z-index: 100; 
+
+  margin-left: auto; 
+
+  margin-right: 3%;
+  
+  padding-right: 0;
+}
+
+.navbar-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap; 
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.menu-toggle-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Poetsen One', sans-serif;
+  transition: background-color 0.3s ease;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-toggle-button:hover {
+  background-color: #555;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px); 
+  right: 0; 
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  z-index: 1001; 
+}
+
+.dropdown-menu.ng-star-inserted { 
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  display: block; 
+  text-align: left;
+  border: none;
+  background: none;
+  width: 100%;
+  box-sizing: border-box; 
+  cursor: pointer;
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: #eefbff;
+}
+
+.dropdown-menu .delete-account-btn {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #c82333;
+  display: block; 
+  text-align: left;
+  border: none;
+  background: none;
+  width: 100%;
+  box-sizing: border-box; 
+  cursor: pointer;
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu .delete-account-btn:hover {
+  background-color: #eefbff;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999; 
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-links .home-link {
+    display: none; 
+}
+.navbar-links .home-link i{
+  font-size: 25px;
+}
+
+.menu-toggle-button {
+  display: flex; 
+}
+
+.dropdown-menu {
+  position: fixed; 
+  top: 60px; 
+  right: 0;
+  left: 0;
+  width: 100%;
+  max-height: calc(100% - 60px); 
+  overflow-y: auto;
+  border-radius: 0; 
+}
+
+@media (min-width: 769px) {
+  .navbar-links {
+    gap: 20px; 
+  }
+
+  .navbar-links .home-link {
+      display: block; 
+  }
+
+  .menu-toggle-button {
+    display: flex;
+  }
+
+  .dropdown-menu {
+    position: absolute; 
+    width: auto;
+    left: unset;
+    top: calc(100% + 10px);
+    right: 0;
+    border-radius: 5px;
+    max-height: unset;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand{
+    position: absolute;
+    left: 47%;
+    transform: translateX(-50%);
+  }
+
+  .navbar-links {
+    gap: 20px;
+    display: flex;
+  }
+
+  .menu-toggle-button {
+    display: flex;
+    margin-right: 20px;
+  }
+
+  .dropdown-menu {
+    position: fixed; 
+    top: 80px; 
+    align-items: right;
+    justify-self: right;
+    right: 10px;
+    width: 50%;
+    max-height: calc(100% - 80px); 
+    overflow-y: auto;
+    border-radius: 15px; 
+  }
+}

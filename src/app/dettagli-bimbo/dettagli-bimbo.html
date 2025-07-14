@@ -1,0 +1,99 @@
+<div class="dettagli-bimbo-container">
+  <div class="header">
+    <button class="back-button" routerLink="/dashboards/dash-genitore">← Torna indietro</button>
+    <h1 *ngIf="childDetails">Dettagli di {{ childDetails.nome }} {{ childDetails.cognome }}</h1>
+    <h1 *ngIf="!childDetails">Caricamento dettagli bambino...</h1>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="child-details-section card">
+      <h2>Dati Bambino</h2>
+      <ng-container *ngIf="childDetails">
+        <div class="detail-item">
+          <strong>Nome:</strong> <span>{{ childDetails.nome }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Cognome:</strong> <span>{{ childDetails.cognome }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Data di Nascita:</strong> <span>{{ childDetails.dataNascita | date: 'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Fermata Associata:</strong>
+          <span *ngIf="fermataAssociata">{{ fermataAssociata.indirizzo }}</span>
+          <span *ngIf="!fermataAssociata">N.D.</span>
+        </div>
+        <div class="detail-item">
+          <strong>ID Beacon:</strong> <span>{{ childDetails.beaconId }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Stato Presenza:</strong>
+          <span [ngClass]="{
+            'status-a-bordo': childDetails.statoPresenza === 'A bordo',
+            'status-assente': childDetails.statoPresenza === 'Sceso',
+            'status-sconosciuto': childDetails.statoPresenza === 'Sconosciuto'
+          }">
+            {{ childDetails.statoPresenza | titlecase }}
+          </span>
+        </div>
+        <div class="elimina-bimbo-container">
+          <button class="btn btn-danger" (click)="deleteChild(childId!)">Elimina profilo di {{childDetails.nome}}</button>
+        </div>
+      </ng-container>
+      <ng-template #loadingChildDetails>
+        <p>Caricamento dati...</p>
+      </ng-template>
+    </div>
+
+    <div class="chat-section card"> <h2>Registro Attività</h2>
+      <div class="chat-messages"> <ng-container *ngIf="statusMessages.length > 0; else noStatusMessages">
+          <div *ngFor="let message of statusMessages" class="message-item status-message">
+            <div class="message-bubble">
+              {{ message.messaggio }}
+            </div>
+            <div class="message-info">
+              {{ message.timestamp | date:'dd/MM/yyyy, HH:mm' }}
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noStatusMessages>
+          <p class="no-messages">Nessun evento di stato registrato per questo bambino.</p>
+        </ng-template>
+        </div>
+      </div>
+  </div>
+
+  <img src="../../assets/icona-chatbot.jpeg" alt="Chatbot" class="chatbot-toggle-button" (click)="toggleChatbot()">
+
+  <div class="chatbot-overlay" [class.show]="isChatbotOpen">
+    <div class="chatbot-header">
+      <h3>Chat con il Bot per {{ childDetails?.nome }}</h3>
+      <button class="close-button" (click)="toggleChatbot()">×</button>
+    </div>
+    <div class="chatbot-messages">
+    <div class="chatbot-messages" #chatbotMessagesPanel>
+      <div *ngFor="let msg of chatMessages" [class]="msg.sender === 'Genitore' ? 'message-bubble-genitore' : 'message-bubble-chatbot'">
+        {{ msg.text }}
+        <div class="message-timestamp">{{ msg.timestamp | date:'HH:mm' }}</div>
+      </div>
+      <div *ngIf="isChatbotTyping" class="message-bubble-chatbot typing-indicator-bubble">
+        <div class="loader"></div>
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <textarea
+        [(ngModel)]="currentChatMessage"
+        placeholder="Scrivi un messaggio..."
+        (keyup.enter)="sendMessage()"
+        (input)="autoGrowTextarea($event)"
+        rows="1">
+      </textarea>
+      <button (click)="sendMessage()" [disabled]="!currentChatMessage.trim() || isSendingMessage">
+        <span *ngIf="!isSendingMessage">Invia</span>
+        <span *ngIf="isSendingMessage">Invio...</span>
+      </button>
+      <div *ngIf="chatErrorMessage" class="chat-error-message">{{ chatErrorMessage }}</div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,151 @@
+.home-background {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.left-section,
+.right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    //background-color: transparent; /* Questo è l'equivalente di rimuoverlo */
+}
+
+.left-section {
+    /* background-color: rgba(0, 0, 0, 0.7); */ /* NON PIÙ NECESSARIO O IMPOSTALO A 'transparent' */
+    text-align: center;
+}
+
+.left-section h1 {
+    font-family: 'Poetsen One', sans-serif;
+    color: #f4ca44;
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.left-section p {
+    font-family: 'Poetsen One', sans-serif;
+    color: #59b379;
+    font-size: 2.1em;
+    margin-bottom: 30px;
+    text-shadow: 0.5px 0.5px 1.5px rgba(0, 0, 0, 0.7);
+}
+
+.content-wrapper {
+    max-width: 500px;
+    /*
+    background-color: rgba(0, 0, 0, 0.3); /* Un leggerissimo sfondo scuro
+    backdrop-filter: blur(5px); /* Effetto sfocatura dietro il contenuto (non supportato ovunque)
+    padding: 20px;
+    border-radius: 8px; */
+}
+
+
+button {
+    font-family: 'Poetsen One', sans-serif;
+  padding: 0.6em 1.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border: 3px solid black;
+  border-radius: 20px;
+  box-shadow: 0.1em 0.1em;
+  cursor: pointer;
+  transition: filter 0.8s ease;
+}
+
+button:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em;
+}
+
+button:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.25em 0.25em;
+}
+
+.buttonRegister{
+    background-color: #f4ca44;
+    margin-right: 20px;
+}
+
+/*
+.buttonRegister:hover{
+    filter: grayscale(100%); 
+}*/
+
+.buttonLogin{
+    background-color: #c1ecf4;
+}
+
+/*
+.buttonLogin:hover{
+    filter: grayscale(100%); 
+}*/
+
+.right-section {
+    background-color: transparent;
+}
+
+.responsive-image {
+    max-width: 80%;
+    height: auto;
+    display: block;
+}
+
+/* --- Media Queries per la responsività (come prima) --- */
+@media (max-width: 768px) {
+
+    .split-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .right-section {
+        width: 100%;
+        order: -1;
+        padding-bottom: 0;
+        margin-bottom: -10vh;
+        min-height: 10vh;
+    }
+
+    .left-section {
+        width: 100%;
+        padding-top: 0;
+        min-height: 50vh;
+    }
+
+    .left-section h1 {
+        font-size: 2.5em;
+    }
+
+    .left-section p {
+        font-size: 1.5em;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

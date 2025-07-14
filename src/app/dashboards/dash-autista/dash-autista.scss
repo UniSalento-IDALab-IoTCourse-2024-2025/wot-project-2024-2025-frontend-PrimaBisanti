@@ -1,0 +1,379 @@
+/* src/app/dashboards/dash-autista/dash-autista.scss */
+
+/* Contenitore principale del componente */
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: transparent;
+  padding-top: 100px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 45px;
+  padding-right: 25px;
+  margin-bottom: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 40px;
+  font-family: 'Poetsen One', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+}
+
+/* Stile della Card per la Tabella */
+.table-section {
+  width: 90%;
+  max-width: 900px;
+  background: #F8F9FD;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 40px;
+  padding: 25px 35px;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poetsen One', sans-serif;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.table-section h2 {
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 2.2em;
+  color: #f4ca44;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+.no-data-message {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #eef4f9;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 20px;
+  margin-top: 20px;
+  font-family: 'Poetsen One', sans-serif;
+  color: #333;
+  overflow: hidden;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 25px -10px;
+}
+
+thead {
+  background-color: #59b379;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border: none;
+}
+
+thead th:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody td:not(:last-child) {
+    border-right: 1px solid #e0e0e0;
+}
+
+thead tr:first-child th:first-child {
+  border-top-left-radius: 15px;
+}
+
+thead tr:first-child th:last-child {
+  border-top-right-radius: 15px;
+}
+
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
+
+/* Stili per le classi di stato del testo */
+.status-a-bordo {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.status-sceso {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.status-attesa {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.status-sconosciuto {
+  color: #777;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.status-confirmed {
+  font-size: 0.9em;
+  color: #888;
+  margin-left: 5px;
+  font-style: italic;
+}
+
+/* --- Stili per i pulsanti di azione --- */
+.action-buttons {
+  display: flex;
+  flex-wrap: nowrap; /* Impedisce il wrap */
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%; /* Assicurati che occupi lo spazio disponibile nella cella */
+  min-width: 250px; /* Regola questo valore in base allo spazio necessario per i pulsanti */
+}
+
+.btn-status {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-family: 'Poetsen One', sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -3px;
+}
+
+/* Stili specifici per i pulsanti di selezione A bordo/Sceso */
+.btn-select-a-bordo {
+  background-color: #59b379;
+  color: white;
+}
+
+.btn-select-a-bordo:hover:not(:disabled) {
+  background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+.btn-select-sceso {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-select-sceso:hover:not(:disabled) {
+  background-color: #da190b;
+  transform: translateY(-1px);
+}
+
+/* Nuovo stile per il pulsante Conferma */
+.btn-conferma {
+  background-color: #f4ca44;
+  color: black;
+  font-weight: bold;
+}
+
+.btn-conferma:hover:not(:disabled) {
+  background-color: #e6b83f;
+  transform: translateY(-1px);
+}
+
+/* Stato disabled generico per tutti i bottoni .btn-status */
+.btn-status:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-fine-corsa {
+  background-color: #f4ca44; /* Colore giallo simile al pulsante Conferma */
+  color: black;
+  font-weight: bold;
+  padding: 12px 25px; /* Simile ai padding degli altri bottoni ma più grande */
+  border: none;
+  border-radius: 25px; /* Più arrotondato come i bottoni di selezione */
+  font-size: 1.1em;
+  font-family: 'Poetsen One', sans-serif;
+  cursor: pointer;
+  margin-top: 30px; /* Spazio dalla tabella */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px; /* Ombra simile alla card */
+}
+
+.btn-fine-corsa:hover {
+  background-color: #e6b83f; /* Colore hover del Conferma */
+  transform: translateY(-2px); /* Effetto sollevamento */
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 35px 35px -22px; /* Ombra più pronunciata */
+}
+
+.btn-fine-corsa:active {
+  transform: translateY(0);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 25px 25px -18px;
+}
+
+
+/* Media Queries per responsività */
+
+/* Tablet (fino a 992px) */
+@media (max-width: 992px) {
+  .table-section {
+    max-width: 700px;
+    padding: 20px; /* Ridotto il padding per schermi più piccoli */
+  }
+
+  table {
+    border-radius: 0; /* Rimuove i bordi arrotondati dalla tabella principale */
+    box-shadow: none; /* Rimuove l'ombra dalla tabella principale */
+    display: block; /* Fa in modo che la tabella si comporti come un blocco principale */
+  }
+
+  thead {
+    display: none; /* Nasconde l'intestazione originale della tabella */
+  }
+
+  tbody {
+    display: block; /* Fa in modo che il tbody si comporti come un blocco */
+    width: 100%;
+  }
+
+  tr {
+    display: block; /* Ogni riga (tr) diventa una "scheda" separata */
+    margin-bottom: 10px; /* Spazio tra le schede */
+    border: 1px solid #e0e0e0; /* Bordo per ogni scheda */
+    border-radius: 10px; /* Bordi arrotondati per le schede */
+    padding: 15px; /* Padding interno per le schede */
+    background-color: #fff; /* Sfondo per le schede */
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 10px -5px; /* Leggera ombra per le schede */
+    overflow: hidden; /* Assicura che i border-radius siano visibili */
+    text-align: left;
+  }
+
+  td {
+    border: none !important; /* Rimuovi tutti i bordi tra le celle */
+    display: block; /* Ogni cella (td) diventa un blocco all'interno della sua scheda */
+    text-align: right; /* Allinea il valore del dato a destra */
+    padding-left: 50%; /* Lascia spazio a sinistra per l'etichetta del dato */
+    position: relative; /* Necessario per posizionare l'etichetta (pseudo-elemento) */
+    padding: 8px 15px; /* Regola il padding per ogni cella su mobile */
+    word-break: break-word; /* Permette la rottura delle parole lunghe */
+    font-size: 18px;
+  }
+
+  td:before {
+    content: attr(data-label); /* Questa è la chiave: recupera il testo dall'attributo data-label */
+    position: absolute;
+    left: 15px; /* Posizione dell'etichetta a sinistra della cella */
+    width: calc(50% - 20px); /* Larghezza dell'etichetta */
+    text-align: left; /* Allinea l'etichetta a sinistra */
+    font-weight: bold;
+    color: #555;
+    white-space: normal; /* Permette all'etichetta di andare a capo */
+    word-break: break-word; /* Rompi le parole lunghe per l'etichetta */
+  }
+
+  td:nth-of-type(1):before { content: "Nome"; }
+  td:nth-of-type(2):before { content: "Cognome"; }
+  td:nth-of-type(3):before { content: "Status"; }
+  td:nth-of-type(4):before { content: "Fermata"; }
+  td:nth-of-type(5):before { content: "Azioni"; }
+
+  .action-buttons {
+    justify-content: center; /* Allinea i pulsanti a destra della cella */
+    padding-right: 0; /* Rimuovi padding se non necessario */
+    flex-wrap: wrap;
+    min-width: unset; /* Resetta per mobile */
+  }
+}
+
+/* Mobile (fino a 768px) - Stili più compatti */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .dashboard-header h1 {
+    font-size: 1.8em;
+  }
+
+  .table-section {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .table-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  td {
+    padding-left: 15px; /* Rimuove il padding a sinistra per le etichette nascoste */
+    text-align: center; /* Centra il contenuto del dato quando l'etichetta è nascosta */
+    font-size: 18px; /* Rendi il font più piccolo su mobile */
+  }
+
+  td:before {
+    display: none; /* Nasconde le etichette "Nome", "Cognome", ecc. su schermi molto piccoli */
+  }
+
+  .action-buttons {
+    flex-direction: column; /* Impila i pulsanti in verticale */
+    gap: 8px;
+    align-items: center; /* Centra i pulsanti impilati */
+    width: 100%; /* Rendi il contenitore dei pulsanti a larghezza piena */
+    margin-left: -6%;
+  }
+
+  .btn-status {
+    width: 100%; /* I pulsanti occupano tutta la larghezza del contenitore */
+    padding: 10px 12px; /* Aumenta il padding per un tocco più facile */
+    font-size: 1em; /* Rendi il font più grande */
+  }
+
+  .btn-fine-corsa {
+    width: 100%; /* Occupare tutta la larghezza disponibile */
+    margin-top: 20px;
+    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 20px; /* Leggermente meno arrotondato per coerenza con altri btn */
+  }
+}

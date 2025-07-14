@@ -1,0 +1,426 @@
+<div class="dashboard-header">
+  <h1 *ngIf="loggedInUserName">Ciao, {{ loggedInUserName }}!</h1>
+  <h1 *ngIf="!loggedInUserName">Benvenuto nella Dashboard Amministratore</h1>
+</div>
+
+<div class="admin-dashboard-container">
+
+  <div class="summary-cards">
+    <div class="card summary-card">
+      <h3>Autisti Registrati</h3>
+      <p>{{ numAutisti }}</p>
+      <button class="btn btn-primary" (click)="openAddDriverModal()">Aggiungi Autista</button>
+    </div>
+    <div class="card summary-card">
+      <h3>Beacon Registrati</h3>
+      <p>{{ numBeacons }}</p>
+      <button class="btn btn-primary" (click)="openAddBeaconModal()">Aggiungi Beacon</button>
+    </div>
+    <div class="card summary-card">
+      <h3>Fermate Registrate</h3>
+      <p>{{ numFermate }}</p>
+      <button class="btn btn-primary" (click)="openAddFermataModal()">Aggiungi Fermata</button>
+    </div>
+    <div class="card summary-card">
+      <h3>Bambini Registrati</h3>
+      <p>{{ numBambini }}</p>
+    </div>
+    <div class="card summary-card">
+      <h3>Genitori Registrati</h3>
+      <p>{{ numGenitori }}</p>
+      </div>
+  </div>
+
+  <div class="sections-container">
+    <div class="admin-section card">
+      <h2>Gestione Autisti</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Cerca autista per nome, cognome o email..."
+               (input)="onSearchAutisti($event)" />
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>Email</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="autisti$ | async as autisti; else loadingAutisti">
+              <tr *ngFor="let autista of autisti">
+                <td>{{ autista.nome }}</td>
+                <td>{{ autista.cognome }}</td>
+                <td>{{ autista.email }}</td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-danger" (click)="deleteUser(autista.uid!, 'Autista')">Elimina</button>
+                </td>
+              </tr>
+              <tr *ngIf="autisti.length === 0">
+                <td colspan="4" class="no-results">Nessun autista trovato.</td>
+              </tr>
+            </ng-container>
+            <ng-template #loadingAutisti>
+              <tr>
+                <td colspan="4" class="loading-message">Caricamento autisti...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="admin-section card">
+      <h2>Gestione Fermate</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Cerca fermata per codice, nome o indirizzo..."
+               (input)="onSearchFermate($event)" />
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome Fermata</th>
+              <th>Indirizzo Fermata</th>
+              <th>ID Fermata</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="fermate$ | async as fermate; else loadingFermate">
+              <tr *ngFor="let fermata of fermate">
+                <td>{{ fermata.nome }}</td>
+                <td>{{ fermata.indirizzo }}</td>
+                <td>{{ fermata.id }}</td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-danger" (click)="deleteFermata(fermata.id!)">Elimina</button>
+                </td>
+              </tr>                                             
+              <tr *ngIf="fermate.length === 0">
+                <td colspan="3" class="no-results">Nessuna fermata trovata.</td>
+              </tr>
+            </ng-container>
+            <ng-template #loadingFermate>
+              <tr>
+                <td colspan="3" class="loading-message">Caricamento fermate...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+
+    <div class="admin-section card">
+      <h2>Gestione Beacon</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Cerca beacon per codice, MAC o nome..."
+               (input)="onSearchBeacons($event)" />
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Beacon</th>
+              <th>Indirizzo Mac</th>
+              <th>Nome beacon</th>
+              <th>Assegnato</th>
+              <th>ID Genitore</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="beacons$ | async as beacons; else loadingBeacons">
+              <tr *ngFor="let beacon of beacons">
+                <td>{{ beacon.codiceIdentificativo }}</td>
+                <td>{{ beacon.indirizzoMac }}</td>
+                <td>{{ beacon.nomeBeacon || '-' }}</td>
+                <td>{{ beacon.isAssegnato ? 'Sì' : 'No' }}</td>
+                <td>
+                  <span *ngIf="beacon.isAssegnato && beacon.assignedParentId">{{beacon.assignedParentId}}</span>
+                  <span *ngIf="!(beacon.isAssegnato && beacon.assignedParentId)">-</span> 
+                </td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-danger" (click)="deleteBeacon(beacon.id!)">Elimina</button>
+                  </td>
+              </tr>
+              <tr *ngIf="beacons.length === 0">
+                <td colspan="5" class="no-results">Nessun beacon trovato.</td>
+              </tr>
+            </ng-container>
+            <ng-template #loadingBeacons>
+              <tr>
+                <td colspan="5" class="loading-message">Caricamento beacon...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-section card">
+      <h2>Gestione Bambini</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Cerca bambino per nome, cognome o ID genitore..."
+               (input)="onSearchBambini($event)" />
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>ID Genitore</th>
+              <th>Stato Presenza</th>
+              <th>ID Beacon</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="bambini$ | async as bambini; else loadingBambini">
+              <tr *ngFor="let bambino of bambini">
+                <td>{{ bambino.nome }}</td>
+                <td>{{ bambino.cognome }}</td>
+                <td>{{ bambino.genitoreId }}</td>
+                <td>{{ bambino.statoPresenza }}</td>
+                <td>{{ bambino.beaconId || '-' }}</td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-info" (click)="openChildDetailsModal(bambino.id!)">Dettagli</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteChild(bambino.id!)">Elimina</button>
+                </td>
+              </tr>
+              <tr *ngIf="bambini.length === 0">
+                <td colspan="6" class="no-results">Nessun bambino trovato.</td>
+              </tr>
+            </ng-container>
+            <ng-template #loadingBambini>
+              <tr>
+                <td colspan="6" class="loading-message">Caricamento bambini...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-section card">
+      <h2>Gestione Genitori</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Cerca genitore per nome, cognome o email..."
+               (input)="onSearchGenitori($event)" />
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>Email</th>
+              <th>ID Genitore</th>
+              <th>ID Bambino</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="genitori$ | async as genitori; else loadingGenitori">
+              <tr *ngFor="let genitore of genitori">
+                <td>{{ genitore.nome }}</td>
+                <td>{{ genitore.cognome }}</td>
+                <td>{{ genitore.email }}</td>
+                <td>{{ genitore.uid }}</td>
+                <td>
+                  <span *ngIf="genitore.refFigli && genitore.refFigli.length > 0">
+                    {{ genitore.refFigli.join(', ') }}
+                  </span>
+
+                  <span *ngIf="!genitore.refFigli || genitore.refFigli.length === 0">
+                    -
+                  </span> 
+                </td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-danger" (click)="deleteUser(genitore.uid!, 'Genitore')">Elimina</button>
+                </td>
+              </tr>
+              <tr *ngIf="genitori.length === 0">
+                <td colspan="4" class="no-results">Nessun genitore trovato.</td>
+              </tr>
+            </ng-container>
+            <ng-template #loadingGenitori>
+              <tr>
+                <td colspan="4" class="loading-message">Caricamento genitori...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showAddDriverModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Aggiungi Nuovo Autista</h2>
+      <button class="close-button" (click)="closeAddDriverModal()">&times;</button>
+    </div>
+    <form class="modal-form" (ngSubmit)="onAddDriverSubmit()">
+      <div class="form-group">
+        <label for="driverNome">Nome:</label>
+        <input type="text" id="driverNome" name="driverNome" [(ngModel)]="newDriver.nome" required>
+      </div>
+      <div class="form-group">
+        <label for="driverCognome">Cognome:</label>
+        <input type="text" id="driverCognome" name="driverCognome" [(ngModel)]="newDriver.cognome" required>
+      </div>
+      <div class="form-group">
+        <label for="driverEmail">E-mail:</label>
+        <input type="email" id="driverEmail" name="driverEmail" [(ngModel)]="newDriver.email" required>
+      </div>
+      <div class="form-group">
+        <label for="driverPassword">Password:</label>
+        <div class="password-input-container">
+          <input [type]="passwordVisible ? 'text' : 'password'" id="driverPassword" name="driverPassword" [(ngModel)]="newDriver.password" required>
+          <span class="toggle-password" (click)="togglePasswordVisibility()">
+            <i [class]="passwordVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="addDriverMessage" [class.error-message]="addDriverError" [class.success-message]="!addDriverError" class="form-message">
+        {{ addDriverMessage }}
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-primary">Aggiungi Autista</button>
+        <button type="button" class="btn btn-secondary" (click)="closeAddDriverModal()">Annulla</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showAddBeaconModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Aggiungi Nuovo Beacon</h2>
+      <button class="close-button" (click)="closeAddBeaconModal()">&times;</button>
+    </div>
+    <form class="modal-form" (ngSubmit)="onAddBeaconSubmit()">
+      <div class="form-group">
+        <label for="beaconCodiceIdentificativo">Codice Identificativo:</label>
+        <input type="text" id="beaconCodiceIdentificativo" name="beaconCodiceIdentificativo" [(ngModel)]="newBeacon.codiceIdentificativo" required>
+      </div>
+      <div class="form-group">
+        <label for="beaconIndirizzoMac">Indirizzo MAC:</label>
+        <input type="text" id="beaconIndirizzoMac" name="beaconIndirizzoMac" [(ngModel)]="newBeacon.indirizzoMac" required>
+      </div>
+      <div class="form-group">
+        <label for="beaconNome">Nome del Beacon:</label>
+        <input type="text" id="beaconNome" name="beaconNome" [(ngModel)]="newBeacon.nomeBeacon" required>
+      </div>
+      <div class="form-group">
+        <label for="beaconPassword">Password:</label>
+        <div class="password-input-container">
+          <input [type]="passwordVisible ? 'text' : 'password'" id="beaconPassword" name="beaconPassword" [(ngModel)]="newBeacon.password" required>
+          <span class="toggle-password" (click)="togglePasswordVisibility()">
+            <i [class]="passwordVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="addBeaconMessage" [class.error-message]="addBeaconError" [class.success-message]="!addBeaconError" class="form-message">
+        {{ addBeaconMessage }}
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-primary">Aggiungi Beacon</button>
+        <button type="button" class="btn btn-secondary" (click)="closeAddBeaconModal()">Annulla</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showAddFermataModal">
+  <div class="modal-content"> 
+  <div class="modal-header">
+    <h2>Aggiungi Nuova Fermata</h2>
+    <button class="close-button" (click)="closeAddFermataModal()">&times;</button>
+  </div>
+  <form class="modal-form" (ngSubmit)="onAddFermataSubmit()">
+    <div class="form-group">
+      <label for="fermataNome">Nome Fermata:</label>
+      <input type="text" id="fermataNome" name="fermataNome" [(ngModel)]="newFermata.nome" required>
+    </div>
+    <div class="form-group">
+      <label for="fermataIndirizzo">Indirizzo Fermata:</label>
+      <input type="text" id="fermataIndirizzo" name="fermataIndirizzo" [(ngModel)]="newFermata.indirizzo" required>
+    </div>
+
+    <div *ngIf="addFermataMessage" [class.error-message]="addFermataError" [class.success-message]="!addFermataError" class="form-message">
+      {{ addFermataMessage }}
+    </div>
+
+    <div class="modal-actions">
+      <button type="submit" class="btn btn-primary">Aggiungi Fermata</button>
+      <button type="button" class="btn btn-secondary" (click)="closeAddFermataModal()">Annulla</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showChildDetailsModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Dettagli Bambino</h2>
+      <button class="close-button" (click)="closeChildDetailsModal()">&times;</button>
+    </div>
+
+    <div *ngIf="childDetailsLoading" class="loading-message">Caricamento dettagli...</div>
+    <div *ngIf="childDetailsError" class="error-message">{{ childDetailsError }}</div>
+
+    <div *ngIf="selectedChildDetails && !childDetailsLoading">
+      <div class="details-group">
+        <label>Nome:</label>
+        <span>{{ selectedChildDetails.nome }}</span>
+      </div>
+      <div class="details-group">
+        <label>Cognome:</label>
+        <span>{{ selectedChildDetails.cognome }}</span>
+      </div>
+      <div class="details-group">
+        <label>ID Bambino:</label>
+        <span>{{ selectedChildDetails.id }}</span>
+      </div>
+      <div class="details-group">
+        <label>ID Genitore:</label>
+        <span>{{ selectedChildDetails.genitoreId }}</span>
+      </div>
+      <div class="details-group">
+        <label>Data di Nascita:</label>
+        <span>{{ selectedChildDetails.dataNascita ? (selectedChildDetails.dataNascita | date:'dd/MM/yyyy') : '-' }}</span>
+      </div>
+      <div class="details-group">
+        <label>Stato Presenza:</label>
+        <span>{{ selectedChildDetails.statoPresenza }}</span>
+      </div>
+      <div class="details-group">
+        <label>ID Beacon Associato:</label>
+        <span>{{ selectedChildDetails.beaconId || '-' }}</span>
+      </div>
+      <div class="details-group">
+        <label>Ultima Attività:</label>
+        <span>{{ selectedChildDetails.ultimaAttivita ? (selectedChildDetails.ultimaAttivita | date:'short') : '-' }}</span>
+      </div>
+      <div class="details-group">
+        <label>Fermata Associata:</label>
+        <span>{{ selectedChildDetails.fermataAssociataId || '-' }}</span>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" (click)="closeChildDetailsModal()">Chiudi</button>
+    </div>
+  </div>
+</div>

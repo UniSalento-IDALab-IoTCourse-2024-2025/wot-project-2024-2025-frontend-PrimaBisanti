@@ -1,0 +1,44 @@
+<nav class="navbar"
+     [class.navbar--landing-layout]="isLandingPage && !isAuthenticated"
+     [class.navbar--auth-layout]="isAuthRoute"
+     [class.navbar--logged-in-layout]="isAuthenticated && !isAuthRoute && !isLandingPage">
+  
+  <div class="navbar-brand">
+    <a routerLink="/" (click)="closeMenu()">
+        <img src="../../assets/logo.png" alt="Logo" class="logo">
+    </a>
+  </div>
+
+  <div class="navbar-links" *ngIf="showLinksSection">
+    
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()"
+       class="home-link">
+      <i class="pi pi-home"></i>
+    </a>
+
+    <ng-container *ngIf="isAuthenticated">
+        <button class="menu-toggle-button" (click)="toggleMenu()">
+          <i [class]="isMenuOpen ? 'pi pi-times' : 'pi pi-user'"></i>
+        </button>
+
+        <div class="dropdown-menu" *ngIf="isMenuOpen">
+            <a *ngIf="ruoliUser === 'Genitore'" routerLink="../dashboards/dash-genitore" routerLinkActive="active" (click)="closeMenu()">
+              {{ userNameAndSurname ? userNameAndSurname : 'Dashboard Genitore' }}
+            </a>
+            <a *ngIf="ruoliUser === 'Autista'" routerLink="../dashboards/dash-autista" routerLinkActive="active" (click)="closeMenu()">
+              {{ userNameAndSurname ? userNameAndSurname : 'Dashboard Autista' }}
+            </a>
+            <a *ngIf="ruoliUser === 'Amministratore'" routerLink="../dashboards/dash-amministratore" routerLinkActive="active" (click)="closeMenu()">
+              {{ userNameAndSurname ? userNameAndSurname : 'Dashboard Amministratore' }}
+            </a>
+            <button *ngIf="ruoliUser === 'Genitore'" (click)="deleteAccount(); closeMenu()" class="delete-account-btn">
+              Elimina Account
+            </button>
+            <button (click)="logout()">Logout</button>
+        </div>
+    </ng-container>
+    
+  </div>
+</nav>
+
+<div class="overlay" *ngIf="isMenuOpen" (click)="closeMenu()"></div>

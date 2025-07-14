@@ -1,0 +1,59 @@
+<div class="dashboard-header">
+  <h1 *ngIf="userName">Ciao, {{ userName }}!</h1>
+  <h1 *ngIf="!userName">Benvenuto nella Dashboard Genitore</h1>
+</div>
+
+<div class="main-content">
+  <div class="table-container">
+    <h2>I tuoi figli</h2>
+
+    <ng-container *ngIf="children$ | async as children; else loadingOrError">
+      <p *ngIf="children.length === 0" class="no-data-message">
+        Nessun bambino registrato. Clicca sul pulsante "Aggiungi Bambino" per iniziare!
+      </p>
+
+      <table *ngIf="children.length > 0">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Status Viaggio</th>
+            <th>Dettagli</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let child of children">
+            <td>{{ child.nome }}</td>
+            <td>{{ child.cognome }}</td>
+            <td>
+              <span [ngClass]="{
+                'status-a-bordo': child.statoPresenza === 'A bordo',
+                'status-sceso': child.statoPresenza === 'Sceso',
+                'status-sconosciuto': child.statoPresenza === 'Sconosciuto'
+              }">
+                {{ child.statoPresenza === 'A bordo' ? 'A bordo' :
+                   (child.statoPresenza === 'Sceso' ? 'Sceso' : 'Sconosciuto') }}
+              </span>
+            </td>
+            <td><button class="detail-button" (click)="onViewChildDetails(child)">Visualizza</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-template #loadingOrError>
+      <div *ngIf="isLoading" class="loading-indicator">Caricamento figli...</div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="!isLoading && !errorMessage" class="loading-indicator">
+        Recupero dati utente in corso...
+      </div>
+    </ng-template>
+
+  </div>
+
+  <div class="image-container">
+    <button class="image-button" (click)="onImageClick()">
+      <img src="assets/aggiungiBambino.png" alt="Aggiungi Bambino" class="responsive-image">
+    </button>
+  </div>
+</div>

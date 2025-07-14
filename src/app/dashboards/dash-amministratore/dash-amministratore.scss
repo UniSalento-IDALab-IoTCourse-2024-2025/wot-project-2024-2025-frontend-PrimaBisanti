@@ -1,0 +1,888 @@
+/* src/app/dashboards/dashboard-amministratore/dash-amministratore.scss */
+
+/* Lo stile del componente host è cruciale per il layout generale */
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin-top: 80px; /* Spazio sotto la navbar, se presente */
+  min-height: calc(100vh - 80px);
+}
+
+/* Contenitore principale della dashboard */
+.admin-dashboard-container {
+  width: 100%;
+  max-width: 1400px; /* Larghezza massima aumentata per desktop */
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Spazio tra le sezioni */
+  font-family: 'Poetsen One', sans-serif;
+  color: #333;
+}
+
+/* --- Titolo Principale (Dashboard Amministratore) --- */
+h1 {
+  font-size: 2.8em;
+  color: #59b379; /* Colore più istituzionale, cambiato da #f4ca44 per coerenza con il blu */
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 45px;
+  padding-right: 25px;
+  margin-bottom: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 40px;
+  font-family: 'Poetsen One', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+}
+
+/* --- Sezione Riepilogo (Summary Cards) --- */
+.summary-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background: #f8f9fd;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 20px;
+  padding: 25px 30px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+
+
+  h3 {
+    font-size: 1.2em;
+    color: #424242;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 2.7em;
+    font-weight: bold;
+    color: #59b379; /* Colore blu per i numeri, cambiato da #f4ca44 */
+    margin-bottom: 20px;
+  }
+  .btn {
+    background-color: #59b379; /* Blu per i pulsanti, cambiato da #f4ca44 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: 'Poetsen One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    &:hover {
+      background-color: #59b379; /* Blu più scuro all'hover */
+      transform: translateY(-2px);
+    }
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* --- Contenitore delle Sezioni (Autisti, Beacon, Bambini) --- */
+.sections-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.admin-section {
+  background: #f8f9fd;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  h2 {
+    font-size: 2em;
+    color: #59b379; /* Verde per i sottotitoli di sezione, mantenuto */
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* --- Barra di Ricerca --- */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    transition: border-color 0.3s ease;
+    font-family: 'Poetsen One', sans-serif;
+    &:focus {
+      outline: none;
+      border-color: #3f51b5; /* Blu al focus, cambiato da #f4ca44 */
+      box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2);
+    }
+  }
+}
+
+/* --- Tabelle Generali --- */
+.table-responsive {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 20px; /* Bordi arrotondati per l'intera tabella su desktop */
+  margin-top: 15px;
+  font-size: 0.95em;
+  font-family: 'Poetsen One', sans-serif;
+  color: #333;
+  overflow: hidden; /* Nasconde ciò che va oltre i bordi arrotondati */
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 25px -10px; /* Ombra per la tabella */
+
+  thead {
+    background-color: #59b379; /* Verde per l'intestazione, mantenuto */
+    color: white;
+    th {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 2px solid #4a9d68; /* Bordo più scuro sotto l'intestazione */
+      color: white;
+      &:not(:last-child) {
+        border-right: 1px solid rgba(255, 255, 255, 0.3); /* Separatore tra le colonne */
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #eee; /* Separatore tra le righe */
+      &:nth-child(even) {
+        background-color: #f9f9f9; /* Sfondo alternato per le righe */
+      }
+      &:hover {
+        background-color: #eef4f9; /* Effetto hover per le righe */
+      }
+    }
+    td {
+      padding: 15px;
+      color: #444;
+      &:not(:last-child) {
+        border-right: 1px solid #e0e0e0; /* Separatore tra le celle del corpo */
+      }
+    }
+  }
+
+  /* Bordi arrotondati per gli angoli della tabella (intestazione) */
+  thead tr:first-child th:first-child {
+    border-top-left-radius: 15px;
+  }
+  thead tr:first-child th:last-child {
+    border-top-right-radius: 15px;
+  }
+  /* Bordi arrotondati per gli angoli della tabella (corpo, ultima riga) */
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+  }
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
+  }
+}
+
+/* --- Messaggi di caricamento/nessun risultato --- */
+.no-results, .loading-message {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-style: italic;
+  font-family: 'Poetsen One', sans-serif;
+}
+
+/* --- Pulsanti di Azione nelle Tabelle --- */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start; /* Allinea i pulsanti a sinistra */
+
+  .btn {
+    padding: 8px 15px;
+    border-radius: 8px; /* Bordi arrotondati per i pulsanti */
+    font-size: 0.85em;
+    font-family: 'Poetsen One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -3px; /* Leggera ombra per i pulsanti */
+
+    &.btn-danger {
+      background-color: #f44336; /* Rosso */
+      color: white;
+      &:hover {
+        background-color: #d32f2f;
+        transform: translateY(-1px);
+      }
+    }
+    &.btn-info {
+      background-color: #2196f3; /* Blu, cambiato da #f4ca44 */
+      color: white;
+      &:hover {
+        background-color: #1976d2;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+
+/*
+================================================================================
+MEDIA QUERIES PER RESPONSIVITA'
+================================================================================
+*/
+
+/* Media Query per Tablet e Schermi Desktop più piccoli (max-width: 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .admin-dashboard-container {
+    padding: 0 15px;
+    gap: 20px; /* Riduci spazio tra le sezioni */
+  }
+  h1 {
+    font-size: 2.2em;
+    font-family: 'Poetsen One', sans-serif;
+  }
+  .summary-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  .summary-card {
+    width: 95%;
+    max-width: 400px;
+    padding: 20px 25px;
+    h3 {
+      font-size: 1.4em;
+    }
+    p {
+      font-size: 2.5em;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 0.9em;
+    }
+  }
+  .admin-section {
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 20px -15px; /* Ombra ridotta */
+    h2 {
+      font-size: 1.8em;
+    }
+  }
+  .search-bar input {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+
+  /* --- Tabella verticale per schermi <= 1024px (tablet) --- */
+  .table-responsive {
+    overflow-x: hidden; /* Nascondi lo scroll orizzontale se la tabella è verticalizzata, qui va bene */
+  }
+
+  table {
+    display: block; /* La tabella si comporta come un blocco principale */
+    border-radius: 0; /* Rimuovi i bordi arrotondati della tabella principale */
+    box-shadow: none; /* Rimuovi l'ombra dalla tabella principale (ogni riga avrà la sua) */
+    margin-top: 10px; /* Riduci il margine superiore della tabella */
+  }
+
+  thead {
+    display: none; /* Nasconde l'intestazione originale della tabella */
+  }
+
+  tbody {
+    display: block; /* Il tbody si comporta come un blocco */
+    width: 100%;
+  }
+
+  tr {
+    display: block; /* Ogni riga (tr) diventa una "scheda" separata */
+    margin-bottom: 15px; /* Spazio tra le schede */
+    border: 1px solid #ddd; /* Bordo per ogni scheda */
+    border-radius: 10px; /* Bordi arrotondati per le schede */
+    padding: 15px; /* Padding interno per le schede */
+    background-color: #fff; /* Sfondo per le schede */
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 10px -5px; /* Ombra per le schede singole */
+    overflow: hidden; /* Assicura che i border-radius siano visibili */
+
+    &:nth-child(even) {
+      background-color: #fff; /* Reset sfondo alternato per le schede */
+    }
+    &:hover {
+      background-color: #f5f5f5; /* Hover per le schede */
+    }
+  }
+
+  td {
+    border: none !important; /* Rimuovi tutti i bordi tra le celle */
+    position: relative; /* Necessario per posizionare l'etichetta (pseudo-elemento) */
+    padding-left: 50%; /* Lascia spazio a sinistra per l'etichetta del dato */
+    text-align: right; /* Allinea il valore del dato a destra */
+    display: block; /* Ogni cella (td) diventa un blocco all'interno della sua scheda */
+    padding: 8px 15px; /* Regola il padding per ogni cella */
+    word-break: break-word; /* Permette la rottura delle parole lunghe */
+    font-size: 0.9em; /* Riduci la dimensione del font del dato */
+  }
+
+  td::before {
+    content: attr(data-label); /* Recupera il testo dall'attributo data-label */
+    position: absolute;
+    left: 15px; /* Posizione dell'etichetta a sinistra della cella */
+    width: calc(50% - 25px); /* Larghezza dell'etichetta */
+    text-align: left; /* Allinea l'etichetta a sinistra */
+    font-weight: bold;
+    color: #555;
+    white-space: normal; /* Permette all'etichetta di andare a capo */
+    word-break: break-word; /* Rompi le parole lunghe per l'etichetta */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajusta per il centro esatto */
+    font-size: 0.9em; /* Dimensione del font dell'etichetta */
+  }
+
+
+  .actions {
+    flex-direction: row; /* Mantiene i bottoni in riga su tablet */
+    gap: 8px;
+    justify-content: flex-end; /* Allinea a destra */
+    .btn {
+      width: auto; /* Lascia che i bottoni abbiano la loro larghezza naturale */
+      padding: 8px 12px; /* Riduci leggermente il padding */
+      font-size: 0.8em; /* Riduci il font */
+    }
+  }
+}
+
+/* Media Query per Schermi Smartphone (fino a 768px) */
+@media (max-width: 768px) { /* Modificato per includere anche gli schermi più piccoli */
+  .dashboard-header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .dashboard-header h1 {
+    font-size: 1.8em;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  .summary-card {
+    padding: 20px 25px;
+    p {
+      font-size: 2.5em;
+    }
+  }
+  .admin-section {
+    content: none !important;
+    padding: 15px;
+    box-shadow: rgba(133, 189, 215, 0.5) 0px 15px 15px -10px; /* Ombra ridotta per mobile */
+    h2 {
+      font-size: 1.6em;
+    }
+    margin-right: 0;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: none;
+  }
+  .admin-section::before{
+    content: none !important;
+  }
+  .admin-section td::before {
+    content: none !important; 
+    /* Aggiungi queste proprietà per sicurezza, per evitare che occupi spazio */
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .search-bar input {
+    padding: 10px 15px;
+  }
+
+  /* --- Per le tabelle, NUOVE REGOLE per schermi molto piccoli (768px e sotto) --- */
+  table{
+    border-radius: 0; /* Rimuove i bordi arrotondati dalla tabella principale */
+    box-shadow: none; /* Rimuove l'ombra dalla tabella principale */
+    display: block; /* Fa in modo che la tabella si comporti come un blocco principale */
+    font-size: 18px;
+  }
+
+  thead{
+    display: none; /* Nasconde l'intestazione originale della tabella su mobile */
+  }
+
+  tbody{
+    display: block; /* Fa in modo che il tbody si comporti come un blocco */
+    width: 100%;
+  }
+
+  tr{
+    display: block; /* Ogni riga (tr) diventa una "scheda" separata */
+    margin-bottom: 10px; /* Spazio tra le schede */
+    border: 1px solid #e0e0e0; /* Bordo per ogni scheda */
+    border-radius: 10px; /* Bordi arrotondati per le schede */
+    padding: 15px; /* Padding interno per le schede */
+    background-color: #fff; /* Sfondo per le schede */
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 10px -5px; /* Leggera ombra per le schede */
+    overflow: hidden; /* Assicura che i border-radius siano visibili */
+    text-align: left;
+  }
+
+  td {
+    border: none !important; /* Rimuovi tutti i bordi tra le celle */
+    display: block; /* Ogni cella (td) diventa un blocco all'interno della sua scheda */
+    text-align: center; /* Allinea il valore del dato al centro */
+    padding-left: 50%; /* Lascia spazio a sinistra per l'etichetta del dato */
+    position: relative; /* Necessario per posizionare l'etichetta (pseudo-elemento) */
+    padding: 8px 10px; /* Regola il padding per ogni cella su mobile */
+    word-break: break-word; /* Permette la rottura delle parole lunghe */
+    font-size: 18px;
+  }
+  td::before {
+    content: attr(data-label); /* Questa è la chiave: recupera il testo dall'attributo data-label */
+    position: absolute;
+    left: 15px; /* Posizione dell'etichetta a sinistra della cella */
+    width: calc(50% - 20px); /* Larghezza dell'etichetta */
+    text-align: left; /* Allinea l'etichetta a sinistra */
+    font-weight: bold;
+    color: #555;
+    white-space: normal; /* Permette all'etichetta di andare a capo */
+    word-break: break-word; /* Rompi le parole lunghe per l'etichetta */
+  }
+
+  .actions {
+    flex-direction: column; /* Impila i pulsanti verticalmente */
+    gap: 5px;
+    align-items: stretch; /* Fai in modo che i bottoni si estendano a tutta la larghezza disponibile */
+    .btn {
+      width: 100%; /* Rendi i pulsanti a larghezza piena */
+      padding: 8px 15px; /* Aumenta il padding per un tocco più facile */
+      font-size: 0.9em; /* Aumenta il font per leggibilità */
+    }
+  }
+
+  .modal-content {
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 90%; /* Adatta la larghezza su schermi più piccoli */
+  }
+  .modal-header h2 {
+    font-size: 1.5em;
+  }
+  .close-button {
+    font-size: 2em;
+    font-family: 'Poetsen One', sans-serif;
+    top: 10px;
+    right: 15px;
+  }
+  .form-group input {
+    padding: 10px 12px;
+    font-size: 0.9em;
+  }
+  .modal-actions {
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+/* Media Query per Schermi molto piccoli (fino a 480px) */
+@media (max-width: 480px) {
+  .admin-dashboard-container {
+    padding: 0 10px;
+  }
+  .summary-card {
+    width: 100%; /* Full width on small phones */
+    padding: 15px 20px;
+    h3 {
+      font-size: 1.4em;
+    }
+    p {
+      font-size: 2.2em;
+    }
+    .btn {
+      padding: 8px 15px;
+      font-size: 0.8em;
+    }
+  }
+  h1 {
+    font-size: 1.6em;
+  }
+  h2 {
+    font-size: 1.4em;
+  }
+  .admin-section {
+    content: none !important;
+    padding: 10px;
+    box-shadow: rgba(133, 189, 215, 0.3) 0px 10px 10px -5px; /* Ombra ulteriormente ridotta */
+  }
+  .search-bar input {
+    padding: 8px 10px;
+    font-size: 0.9em;
+  }
+
+  /* Per le tabelle, affinamenti per schermi molto molto piccoli */
+  td {
+    padding: 6px 10px; /* Riduci ulteriormente il padding */
+    font-size: 0.85em; /* Riduci ulteriormente il font del dato */
+  }
+  td::before {
+    font-size: 0.8em; /* Riduci ulteriormente il font dell'etichetta */
+    margin-right: 8px; /* Riduci il margine */
+  }
+
+  .actions .btn {
+    padding: 6px 10px;
+    font-size: 0.8em;
+  }
+
+  .modal-content {
+    padding: 15px;
+    border-radius: 15px;
+  }
+  .modal-header h2 {
+    font-size: 1.3em;
+  }
+  .close-button {
+    font-size: 1.8em;
+    font-family: 'Poetsen One', sans-serif;
+    top: 8px;
+    right: 10px;
+  }
+  .form-group label {
+    font-size: 0.9em;
+  }
+  .form-group input {
+    padding: 8px 10px;
+    font-size: 0.85em;
+  }
+  .modal-actions {
+    gap: 10px;
+    .btn {
+      padding: 10px;
+      font-size: 0.9em;
+    }
+  }
+
+  .details-group {
+    label {
+      font-size: 0.8em;
+    }
+    span {
+      font-size: 1em;
+    }
+  }
+}
+
+/*
+================================================================================
+STILI PER I MODALI (AGGIUNGI AUTISTA E AGGIUNGI BEACON)
+================================================================================
+*/
+
+.modal-overlay {
+  position: fixed;
+  top: 5%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Sfondo semi-trasparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Assicurati che sia sopra tutto il resto */
+  backdrop-filter: blur(5px); /* Effetto sfocato sullo sfondo */
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  /* Stile del container preso da .container in login.scss */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 350px;
+  background: #F8F9FD;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 40px; /* Bordi arrotondati come il login */
+  padding: 30px 35px; /* Padding come il login */
+  border: 5px solid rgb(255, 255, 255); /* Bordo come il login */
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px; /* Ombra come il login */
+  margin: 20px;
+  position: relative;
+  font-family: 'Poetsen One', sans-serif; /* Font come il login */
+  animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Assicura che l'header occupi tutta la larghezza del modale */
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  border-bottom: none; /* Rimosso il bordo inferiore per lo stile login */
+
+  h2 {
+    /* Stile del titolo come .heading in login.scss */
+    font-family: 'Poetsen One', sans-serif;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-weight: 900;
+    font-size: 2em; /* Leggermente più piccolo del login per adattarsi al modale */
+    color: #59b379; /* Colore del titolo del login */
+    margin: 0;
+    flex-grow: 1; /* Permette al titolo di espandersi */
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 2.5em;
+    font-family: 'Poetsen One', sans-serif;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 0;
+    line-height: 1;
+    position: absolute; /* Posizionamento assoluto per la 'x' */
+    top: 15px;
+    right: 20px;
+    z-index: 10; /* Assicura che sia cliccabile */
+    &:hover {
+      color: #333;
+    }
+  }
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spazio tra i campi del form */
+  width: 100%; /* Assicura che il form occupi tutta la larghezza del modale */
+  margin-top: 10px; /* Spazio tra titolo e form */
+}
+
+.form-group {
+  display: center;
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+  flex-direction: column;
+  label {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: 'Poetsen One', sans-serif; /* Font come il login */
+  }
+  input {
+    /* Stile dell'input preso da .form .input in login.scss */
+    width: 90%; /* Occupa tutta la larghezza disponibile */
+    background: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 20px; /* Bordi arrotondati come il login */
+    margin-top: 10px; /* Rimosso il margin-top qui per gestire il gap del form-group */
+    box-shadow: #cff0ff 0px 10px 10px -5px; /* Ombra come il login */
+    border-inline: 2px solid transparent;
+    font-family: 'Poetsen One', sans-serif;
+    color: #333; /* Colore del testo input */
+
+    &::-moz-placeholder {
+      font-family: 'Poetsen One', sans-serif;
+      color: rgb(170, 170, 170);
+    }
+    &::placeholder {
+      font-family: 'Poetsen One', sans-serif;
+      color: rgb(170, 170, 170);
+    }
+    &:focus {
+      outline: none;
+      border-inline: 2px solid #12B1D1; /* Colore focus come il login */
+    }
+  }
+}
+
+.form-message {
+  color: #d9534f;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9em;
+  font-family: 'Poetsen One', sans-serif;
+  &.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+}
+
+
+.modal-actions {
+  display: flex;
+  flex-direction: column; /* Impila i pulsanti verticalmente come nel login */
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+
+  .btn {
+    /* Stile del bottone login-button in login.scss */
+    font-family: 'Poetsen One', sans-serif;
+    display: block;
+    width: 100%; /* Rendi i pulsanti a larghezza piena */
+    font-weight: bold;
+    font-size: 18px;
+    background: linear-gradient(45deg, #59b379); /* Colore del login */
+    color: black; /* Testo nero come il login */
+    padding-block: 13px;
+    margin: 0 auto; /* Centra il bottone */
+    border-radius: 20px; /* Bordi arrotondati come il login */
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px; /* Ombra come il login */
+    border: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+    }
+
+    &:active {
+      transform: scale(0.95);
+      box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+    }
+
+    &.btn-secondary { /* Stile per il pulsante "Annulla" */
+      background: #bdbdbd; /* Grigio per l'azione secondaria */
+      color: #333;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -3px; /* Leggera ombra */
+      &:hover {
+        background-color: #a0a0a0;
+        transform: translateY(-1px);
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 8px -5px;
+      }
+      &:active {
+        transform: translateY(0);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;
+      }
+    }
+  }
+}
+
+.password-input-container {
+  position: relative; /* Essenziale per posizionare l'icona in modo assoluto */
+  width: 100%; /* Assicura che il contenitore occupi tutta la larghezza disponibile */
+  display: flex; /* Utile per allineare input e icona */
+  align-items: center; /* Centra verticalmente gli elementi */
+
+  input {
+    width: 100%;
+    padding-right: 40px; /* Aggiungi spazio a destra per l'icona */
+    box-sizing: border-box; /* Assicura che il padding non aumenti la larghezza totale */
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 15px; /* Posiziona l'icona a 15px dal bordo destro */
+    bottom: 15px; /* Posiziona l'icona a 15px dal bordo inferiore */
+    cursor: pointer;
+    color: #777; /* Colore dell'icona (grigio scuro) */
+    font-size: 1.2em; /* Dimensione dell'icona */
+    top: 50%; /* Sposta l'icona a metà altezza del contenitore */
+    transform: translateY(-50%); /* Regola per un perfetto centraggio verticale */
+    z-index: 2; /* Assicura che l'icona sia sopra l'input */
+
+    &:hover {
+      color: #333; /* Colore al passaggio del mouse */
+    }
+  }
+}
+
+
+/* --- NUOVI STILI PER I DETTAGLI DEL BAMBINO NEL MODALE --- */
+.details-group {
+  display: flex;
+  flex-direction: column; /* Impila etichetta e valore */
+  margin-bottom: 10px; /* Spazio tra i gruppi di dettagli */
+  width: 100%; /* Occupa tutta la larghezza del modale */
+  text-align: left; /* Allinea il testo a sinistra */
+
+  label {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 2px;
+    font-weight: bold;
+    font-family: 'Poetsen One', sans-serif;
+  }
+
+  span {
+    font-size: 1.1em;
+    color: #333;
+    font-family: 'Poetsen One', sans-serif;
+    word-break: break-word; /* Permette la rottura delle parole lunghe */
+  }
+}

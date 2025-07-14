@@ -1,0 +1,28 @@
+/* src/styles.scss */
+@import "primeicons/primeicons.css";
+
+/* Reset di base per assicurare che body e html occupino tutta l'altezza */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; /* Fondamentale per il centraggio verticale */
+}
+
+/* Regole per centrare il contenuto di app-root (e quindi il tuo form) */
+app-root { /* O body, a seconda di dove vuoi applicare il centraggio */
+    display: flex;
+    min-height: 100vh; /* Assicura che l'elemento occupi almeno l'altezza della viewport */
+    width: 100%; /* Assicura che l'elemento occupi l'intera larghezza */
+
+    /* Se hai uno sfondo, mettilo qui per coprire l'intera pagina */
+    background-image: url('/assets/bg.jpeg'); /* Sostituisci col tuo percorso! */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    margin: 0;
+}

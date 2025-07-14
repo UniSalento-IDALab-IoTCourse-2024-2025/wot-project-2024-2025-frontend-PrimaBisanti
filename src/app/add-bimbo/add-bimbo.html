@@ -1,0 +1,94 @@
+<div class="add-bimbo-card">
+    <h2>Aggiungi un Nuovo Bambino e Collega il Beacon</h2>
+
+    <form [formGroup]="addBimboForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-sections-wrapper">
+        <div class="form-section">
+          <h3>Dati del Bambino</h3>
+          <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" formControlName="nome" placeholder="Nome del bambino">
+            <div *ngIf="addBimboForm.get('nome')?.invalid && addBimboForm.get('nome')?.touched" class="error-text">
+              Il nome è obbligatorio.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cognome">Cognome:</label>
+            <input type="text" id="cognome" formControlName="cognome" placeholder="Cognome del bambino">
+            <div *ngIf="addBimboForm.get('cognome')?.invalid && addBimboForm.get('cognome')?.touched" class="error-text">
+              Il cognome è obbligatorio.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="dataNascita">Data di nascita:</label>
+            <input type="date" id="dataNascita" formControlName="dataNascita">
+            <div *ngIf="addBimboForm.get('dataNascita')?.invalid && addBimboForm.get('dataNascita')?.touched" class="error-text">
+              La data di nascita è obbligatoria.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fermataAssociataId">Fermata Associata:</label>
+            <select id="fermataAssociataId" formControlName="fermataAssociataId">
+                <option value="">Seleziona una fermata</option>
+                <option *ngFor="let fermata of fermate" [value]="fermata.id">
+                    {{ fermata.nome }} ({{ fermata.indirizzo }})
+                </option>
+            </select>
+            <div *ngIf="addBimboForm.get('fermataAssociataId')?.invalid && addBimboForm.get('fermataAssociataId')?.touched" class="error-text">
+                La fermata è obbligatoria.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-section">
+          <h3>Dati del Beacon</h3>
+          <div class="form-group">
+            <label for="codiceIdentificativoBeacon">Codice Identificativo:</label>
+            <input type="text" id="codiceIdentificativoBeacon" formControlName="codiceIdentificativoBeacon" placeholder="Codice identificativo">
+            <div *ngIf="addBimboForm.get('codiceIdentificativoBeacon')?.invalid && addBimboForm.get('codiceIdentificativoBeacon')?.touched" class="error-text">
+              Il codice identificativo è obbligatorio.
+            </div>
+          </div>
+
+          <div class="form-group password-group">
+            <label for="passwordBeacon">Password:</label>
+            <div class="input-wrapper"> <input
+                [type]="passwordBeaconVisible ? 'text' : 'password'"
+                id="passwordBeacon"
+                formControlName="passwordBeacon"
+                placeholder="Password del beacon"
+              >
+              <div class="password-input-container">
+                  <span class="toggle-password" (click)="togglePasswordBeaconVisibility()">
+                       <i [class]="passwordBeaconVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+                  </span>
+              </div>
+            </div>
+            <div *ngIf="addBimboForm.get('passwordBeacon')?.invalid && addBimboForm.get('passwordBeacon')?.touched" class="error-text">
+              La password è obbligatoria.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="message error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="message success-message">
+        {{ successMessage }}
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">Annulla</button>
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading || addBimboForm.invalid">
+          <span *ngIf="!isLoading">Aggiungi e Collega</span>
+          <span *ngIf="isLoading">Aggiunta in corso...</span>
+        </button>
+      </div>
+
+    </form>
+</div>

@@ -1,0 +1,337 @@
+/* src/app/pages/add-bimbo/add-bimbo.scss */
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: transparent;
+  padding-top: 100px;
+}
+
+.add-bimbo-card {
+  width: 100%;
+  max-width: 900px;
+  background: #F8F9FD;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 40px;
+  padding: 25px 35px;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poetsen One', sans-serif;
+  color: #333;
+}
+
+h2 {
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 2.2em;
+  color: #f4ca44;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+h3 {
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 1.6em;
+  color: #f4ca44;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin-top: 25px;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+  border-bottom: 2px solid #eef4f9;
+  padding-bottom: 10px;
+}
+
+form {
+  font-family: 'Poetsen One', sans-serif;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-sections-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+}
+
+.form-section {
+  flex: 1;
+  min-width: 300px;
+  padding: 15px 0;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="password"],
+.form-group select { /* <--- AGGIUNTO SELECT QUI */
+  font-family: 'Poetsen One', sans-serif;
+  width: 90%;
+  background: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 20px;
+  margin-top: 10px;
+  box-shadow: #cff0ff 0px 10px 10px -5px;
+  border-inline: 2px solid transparent;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus { /* <--- AGGIUNTO SELECT QUI */
+  outline: none;
+  border-inline: 2px solid #12B1D1;
+  box-shadow: 0 0 5px rgba(133, 189, 215, 0.5);
+}
+
+/* STILI SPECIFICI PER IL SELECT PER PERSONALIZZARE LA FRECCIA */
+.form-group select {
+  -webkit-appearance: none; /* Rimuove lo stile di default di Chrome/Safari */
+  -moz-appearance: none;    /* Rimuove lo stile di default di Firefox */
+  appearance: none;         /* Rimuove lo stile di default */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333333" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>'); /* Freccia SVG personalizzata */
+  background-repeat: no-repeat;
+  background-position: right 15px center; /* Posiziona la freccia a destra, centrata verticalmente */
+  background-size: 1em; /* Dimensione della freccia */
+  padding-right: 40px; /* Lascia spazio per la freccia */
+}
+
+
+.error-text {
+  font-family: 'Potsen One', sans-serif;
+  color: #e74c3c;
+  font-size: 0.85em;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.message {
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.success-message {
+  background-color: #e6ffe6;
+  color: #f4ca44;
+  border: 1px solid #f4ca44;
+}
+
+.error-message {
+  font-family: 'Potsen One', sans-serif;
+  background-color: #ffe6e6;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-family: 'Poetsen One', sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px -5px;
+}
+
+.btn-primary {
+  background-color: #f4ca44;
+  color: black;
+}
+
+.btn-primary:hover {
+  background-color: #f4ca44;
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background-color: #ff3434;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #d51c1c;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  min-height: 75px;
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.input-wrapper input,
+.input-wrapper select { /* <--- AGGIUNTO SELECT QUI */
+  width: calc(100% - 40px);
+  padding-right: 40px;
+}
+
+.password-input-container {
+  position: absolute;
+  right: 65px;
+  top: 60%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.toggle-password {
+  cursor: pointer;
+  color: #888;
+  font-size: 1.2em;
+}
+
+.error-text {
+  font-family: 'Potsen One', sans-serif;
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
+  min-height: 20px;
+  display: block;
+}
+
+.error-text:empty {
+  display: none;
+}
+
+
+/* Media Queries per responsività */
+@media (min-width: 769px) and (max-width: 992px) {
+  .add-bimbo-card {
+    max-width: 700px;
+  }
+
+  .form-sections-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-section {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .form-group input,
+  .form-group select { /* <--- AGGIUNTO SELECT QUI */
+    width: calc(100% - 40px);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .add-bimbo-card {
+    padding: 20px;
+    margin: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  h3 {
+    font-size: 1.4em;
+    margin-top: 0;
+  }
+
+  .form-group label {
+    font-size: 1em;
+  }
+  
+  .form-group input,
+  .form-group select { /* <--- AGGIUNTO SELECT QUI */
+    font-size: 0.95em;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="date"],
+  .form-group input[type="password"],
+  .form-group select { /* <--- AGGIUNTO SELECT QUI */
+    width: 100%;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .form-section{
+    padding: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .password-input-container{
+    right: 20px;
+  }
+}

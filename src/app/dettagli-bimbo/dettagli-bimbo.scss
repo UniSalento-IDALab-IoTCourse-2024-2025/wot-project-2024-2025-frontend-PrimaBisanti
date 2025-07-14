@@ -1,0 +1,645 @@
+/* src/app/dashboards/dettagli-bimbo/dettagli-bimbo.scss */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: transparent; // O il colore di sfondo della tua app
+  padding-top: 100px;
+}
+
+.dettagli-bimbo-container {
+  width: 90%;
+  max-width: 1200px; /* Aumentato il max-width per accogliere il layout a due colonne */
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Spazio tra header e contenuto */
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  h1 {
+    margin: 0;
+    color: #333;
+    font-size: 2.2em;
+    font-family: 'Poetsen One', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    flex-grow: 1; /* Permette al titolo di occupare lo spazio centrale */
+  }
+}
+
+.back-button {
+  background-color: #59b379; /* Colore simile al verde del tema */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: 'Poetsen One', sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px -5px;
+}
+
+.back-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.content-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 30px; /* Spazio tra le due sezioni (dettagli e chat) */
+  flex-wrap: wrap; /* Permette alle colonne di impilarsi su schermi piccoli */
+}
+
+/* Stile base per le "card" - riusato dalle dashboard */
+.card {
+  background: #F8F9FD;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 40px;
+  padding: 25px 35px;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  font-family: 'Poetsen One', sans-serif;
+  color: #333;
+  box-sizing: border-box;
+  flex-grow: 1; /* Le card si espandono per riempire lo spazio */
+}
+
+.child-details-section {
+  flex-basis: 30%; /* Circa 1/3 */
+  min-width: 300px; /* Larghezza minima per evitare che diventi troppo stretta */
+  height: fit-content;
+}
+
+.chat-section {
+  flex-basis: 65%; /* Circa 2/3 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spinge l'input in basso */
+  min-width: 400px; /* Larghezza minima per la chat */
+}
+
+h2 {
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 1.8em;
+  color: #f4ca44;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Stili per i dettagli del bambino */
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 1.1em;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  strong {
+    color: #555;
+  }
+}
+
+.loading-message, .no-messages {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  padding: 20px;
+}
+
+/* Stili per le classi di stato (uguali a dash-genitore e dash-autista) */
+.status-a-bordo {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.status-assente {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.status-sconosciuto {
+  color: #777;
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Stili per la sezione chat */
+.chat-messages {
+  flex-grow: 1; /* Permette alla sezione messaggi di riempire lo spazio disponibile */
+  background-color: #eef4f9;
+  border-radius: 15px;
+  padding: 15px;
+  overflow-y: auto; /* Abilita lo scroll se i messaggi superano l'altezza */
+  max-height: 400px; /* Altezza massima per la finestra di chat */
+  margin-bottom: 20px;
+
+  /* *NUOVE REGOLE PER CHAT* */
+  display: flex;
+  flex-direction: column-reverse; /* Inverte l'ordine, l'ultimo elemento è in basso */
+  justify-content: flex-start; /* Inizia a popolare dal basso verso l'alto */
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: auto; /* Spinge l'input in fondo alla card */
+
+  textarea {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+    resize: none; /* Impedisce il ridimensionamento manuale */
+    min-height: 50px;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+
+  button {
+    background-color: #59b379;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'Poetsen One', sans-serif;
+    transition: background-color 0.3s ease;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -3px;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+}
+
+/* Stili per i messaggi di esempio */
+.message-item {
+    display: flex;
+    /* Rimosso margin-bottom: 10px; per evitare doppio margine con flex-direction: column-reverse */
+    margin-top: 10px; /* Aggiunto margin-top per spaziatura tra i messaggi */
+    align-self: flex-start; /* Allinea i messaggi a sinistra per un registro attività */
+    max-width: 90%; /* Limita la larghezza del messaggio */
+    width: fit-content; /* Adatta la larghezza al contenuto */
+}
+
+.message-bubble {
+    padding: 10px 15px;
+    border-radius: 15px;
+    background-color: #dcf8c6; /* Colore verde chiaro per tutti i messaggi */
+    color: #333;
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 0.95em;
+    /* Rimosso border-bottom-left-radius e border-bottom-right-radius specifici */
+}
+
+.message-info {
+    font-size: 0.75em;
+    color: #888;
+    margin-left: 10px; /* Spazio tra bolla e info */
+    align-self: flex-end; /* Allinea timestamp in basso a destra del messaggio */
+    white-space: nowrap; /* Evita il wrap del timestamp */
+}
+
+.elimina-bimbo-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.elimina-bimbo-container .btn {
+    padding: 8px 15px;
+    border-radius: 8px; /* Bordi arrotondati per i pulsanti */
+    font-size: 0.85em;
+    font-family: 'Poetsen One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -3px; /* Leggera ombra per i pulsanti */
+    margin-top: 20px;
+        
+    &.btn-danger {
+      background-color: #f44336; 
+      color: white;
+      &:hover {
+        background-color: #d32f2f;
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+/* Stili per il Chatbot */
+
+.chatbot-toggle-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 100px; /* Dimensione dell'icona */
+  height: 100px;
+  border-radius: 50%;
+  //background-color: rgba(133, 189, 215, 0.95); /* Colore di sfondo dell'icona */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Assicurati che sia sopra altri elementi */
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  // Se l'immagine è un SVG o ha trasparenza, assicurati che si veda bene
+  img {
+    width: 70%; // Riduci la dimensione dell'immagine all'interno del pulsante
+    height: 70%;
+    object-fit: contain;
+  }
+}
+
+.chatbot-overlay {
+  position: fixed;
+  bottom: 140px; /* Sopra il pulsante toggle */
+  left: 30px; /* Allineato con il pulsante toggle */
+  width: 370px; /* Larghezza del chatbot */
+  height: 500px; /* Altezza del chatbot */
+  background: #F8F9FD;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999; /* Appena sotto il bottone toggle per non coprirlo */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  font-family: 'Poetsen One', sans-serif;
+}
+
+.chatbot-container {
+  background-color: #F8F9FD; /* Sfondo della card del chatbot */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px; /* Larghezza massima del chatbot */
+  height: 80%;
+  max-height: 600px; /* Altezza massima del chatbot */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative; // Necessario per il posizionamento del pulsante di chiusura
+}
+
+.chatbot-header {
+  background-color: #007bff; /* Colore header */
+  color: white;
+  padding: 15px 20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poetsen One', sans-serif;
+
+  h3 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 5px;
+
+    &:hover {
+      color: #e0e0e0;
+    }
+  }
+}
+
+.chatbot-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #e0f2f7; /* Sfondo area messaggi */
+  scroll-behavior: smooth; // Per lo scroll automatico
+
+  /* Stili per le bolle di messaggio */
+  .message-bubble-genitore,
+  .message-bubble-chatbot {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    position: relative;
+    font-size: 0.9em;
+    word-wrap: break-word; // Per gestire testi lunghi
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .message-bubble-genitore {
+    background-color: #007bff; /* Blu per il genitore */
+    color: white;
+    align-self: flex-end; /* Allineato a destra */
+    border-bottom-right-radius: 5px; /* Angolo in basso a destra meno arrotondato */
+  }
+
+  .message-bubble-chatbot {
+    background-color: #f0f0f0; /* Grigio chiaro per il chatbot */
+    color: #333;
+    align-self: flex-start; /* Allineato a sinistra */
+    border-bottom-left-radius: 5px; /* Angolo in basso a sinistra meno arrotondato */
+  }
+
+  .message-timestamp {
+    font-size: 0.7em;
+    color: #595959;
+    margin-top: 2px;
+    // Posizionamento sotto la bolla
+    &.message-bubble-genitore + & { // Timestamp sotto la bolla del genitore
+      text-align: right;
+    }
+    &.message-bubble-chatbot + & { // Timestamp sotto la bolla del chatbot
+      text-align: left;
+    }
+  }
+
+  .messages-end {
+    /* Un piccolo div invisibile per facilitare lo scroll a fine chat */
+    height: 1px;
+  }
+}
+
+.loader {
+  width: 30px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
+
+
+.chatbot-input {
+  font-family: 'Poetsen One', sans-serif;
+  display: flex;
+  padding: 10px;
+  background-color: #f8f9fa; /* Sfondo input area */
+  border-top: 1px solid #e0e0e0;
+  border-radius: 15px;
+
+
+  input {
+    font-family: 'Poetsen One', sans-serif;
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 1em;
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  button {
+    font-family: 'Poetsen One', sans-serif;
+    background-color: #28a745; /* Verde per il pulsante Invia */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover:not(:disabled) {
+      background-color: #218838;
+    }
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.chatbot-input textarea {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 1em;
+  resize: none; /* Disabilita il ridimensionamento manuale da parte dell'utente */
+  overflow: hidden; /* Nasconde la scrollbar predefinita */
+  min-height: 40px; /* Altezza minima, circa una riga */
+  max-height: 150px; /* Altezza massima per la textarea prima di aggiungere lo scrollbar */
+  box-sizing: border-box; /* Include padding e border nel calcolo dell'altezza */
+  line-height: 1.4; /* Per un buon spaziatura del testo */
+  margin-right: 20px;
+}
+
+.chatbot-input textarea:focus {
+  outline: none;
+  border-color: #39d946;
+  box-shadow: 0 0 0 3px rgba(244, 202, 68, 0.2);
+}
+
+.chatbot-input button {
+  background-color: #59b379;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Impedisce al testo del pulsante di andare a capo */
+  height: 40px; /* Altezza fissa per allinearsi all'input quando è su una riga */
+  margin: auto;
+}
+
+.chatbot-input button:hover {
+  background-color: #4CAF50;
+}
+
+.chatbot-input button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.chat-error-message {
+  color: #f44336;
+  font-size: 0.9em;
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Media Queries per la responsività */
+@media (max-width: 992px) {
+  .content-wrapper {
+    flex-direction: column; /* Impila le sezioni verticalmente su tablet e mobile */
+    gap: 20px;
+  }
+
+  .child-details-section{
+    flex-basis: auto; /* Rimuove le percentuali fisse */
+    width: 100%; /* Occupano tutta la larghezza */
+    min-width: unset; /* Rimuovi la larghezza minima */
+  }
+  
+  .chat-section {
+    flex-basis: auto; /* Rimuove le percentuali fisse */
+    width: 100%; /* Occupano tutta la larghezza */
+    min-width: unset; /* Rimuovi la larghezza minima */
+    margin-bottom: 30px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 15px;
+
+    h1 {
+      font-size: 1.8em;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dettagli-bimbo-container {
+    width: 100%;
+    padding: 0 10px; /* Riduci il padding sui lati */
+    gap: 10px;
+  }
+
+  .card {
+    padding: 20px 25px; /* Riduci il padding interno delle card */
+    border-radius: 30px;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  .detail-item {
+    font-size: 1em;
+  }
+
+  .chat-input {
+    flex-direction: column;
+
+    textarea {
+      min-height: 40px;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px 15px;
+    }
+  }
+
+  .message-bubble{
+    margin-right: -140px;
+  }
+
+  .message-info{
+    position: relative;
+    left: 17px;
+  }
+
+  .back-button {
+    width: 50%;
+    text-align: center;
+    margin-right: auto;
+    margin-bottom: 20px; 
+  }
+
+  .chatbot-toggle-button {
+    width: 50px;
+    height: 50px;
+    bottom: 15px;
+    left: 15px;
+  }
+
+  .chatbot-overlay {
+    /* Su mobile occupa quasi tutto lo schermo */
+    align-items: flex-end; /* Allinea il container in basso */
+    left: 12px;
+  }
+
+  .chatbot-container {
+    width: 100%;
+    height: 95%; /* Lascia un piccolo bordo sopra */
+    max-height: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chatbot-header{
+    width: 90%;
+  }
+
+  .chatbot-messages{
+    margin-left: 20px;
+  }
+
+  .chatbot-input{
+    width: 85%;
+    position: relative;
+    left: 37px;
+  }
+}

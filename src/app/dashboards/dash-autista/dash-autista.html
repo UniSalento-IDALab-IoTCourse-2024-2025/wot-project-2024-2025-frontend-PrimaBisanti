@@ -1,0 +1,74 @@
+<div class="dashboard-header">
+  <h1 *ngIf="userName">Ciao, {{ userName }}!</h1>
+  <h1 *ngIf="!userName">Benvenuto nella Dashboard Autista</h1>
+</div>
+
+<div class="table-section">
+  <h2>Bimbi a Bordo</h2>
+
+  <p *ngIf="aBordoList.length === 0" class="no-data-message">
+    Nessun bambino trovato per il tuo viaggio attuale.
+  </p>
+
+  <table *ngIf="aBordoList.length > 0">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Status</th>
+        <th>Fermata Associata</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bimbo of aBordoList">
+        <td data-label="Nome">{{ bimbo.nome }}</td>
+        <td data-label="Cognome">{{ bimbo.cognome }}</td>
+        <td data-label="Status">
+          <span [ngClass]="{
+            'status-a-bordo': bimbo.statusPresenza === 'A bordo',
+            'status-sceso': bimbo.statusPresenza === 'Sceso',
+            'status-sconosciuto': bimbo.statusPresenza === 'Sconosciuto'
+            }">
+            {{ bimbo.statusPresenza }}
+          </span>
+        </td>
+        <td data-label="Fermata Associata">
+          <ng-container *ngIf="bimbo.fermataAssociataNome">
+            {{ bimbo.fermataAssociataNome }}<br>
+            <span class="fermata-indirizzo">{{ bimbo.fermataAssociataIndirizzo }}</span>
+          </ng-container>
+          <ng-container *ngIf="!bimbo.fermataAssociataNome">
+            N.D.
+          </ng-container>
+        </td>
+        <td data-label="Azioni" class="action-buttons">
+          <button
+            class="btn-status btn-select-a-bordo"
+            (click)="selectA_Bordo(bimbo)"
+            [disabled]="bimbo.statusPresenza === 'A bordo'">
+            A bordo
+          </button>
+          <button
+            class="btn-status btn-select-sceso"
+            (click)="selectSceso(bimbo)"
+            [disabled]="bimbo.statusPresenza === 'Sceso'">
+            Sceso
+          </button>
+
+          <button
+            class="btn-status btn-conferma"
+            (click)="confermaStato(bimbo)"
+            *ngIf="bimbo.statoSelezionato">
+            Conferma
+          </button>
+
+          <span *ngIf="bimbo.confermato" class="status-confirmed">(Confermato)</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn-fine-corsa" (click)="endRun()">Fine corsa</button>
+
+</div>

@@ -1,0 +1,33 @@
+<div class="home-background">
+    <div class="split-container">
+
+        <div class="left-section">
+            <div class="content-wrapper">
+                <h1>Ogni salita,</h1>
+                <h1>Ogni discesa,</h1>
+                <h1>Tu lo sai!</h1>
+                <p>Ricevi aggiornamenti in tempo reale su salite, discese e ritardi.</p>
+
+
+                <div class="home-actions">
+                    <ng-container *ngIf="!isAuthenticated">
+                        <button routerLink="/register" class="buttonRegister">
+                            <div><span>Registrati</span></div>
+                        </button>
+                        <button routerLink="/login" class="buttonLogin">
+                            <div><span>Login</span></div>
+                        </button>
+                    </ng-container>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="right-section">
+            <img src="/assets/sito.png" alt="Logo" class="responsive-image">
+        </div>
+
+    </div>
+</div>
+
+
